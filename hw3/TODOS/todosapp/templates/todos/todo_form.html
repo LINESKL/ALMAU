@@ -3,13 +3,16 @@
 {% block title %}{% if is_edit %}Edit Todo{% else %}Create Todo{% endif %}{% endblock %}
 
 {% block content %}
-<div class="mt-4">
+    <div class="form-group">
+<div class="mt-4 ">
     <h1>{% if is_edit %}Edit Todo{% else %}Create Todo{% endif %}</h1>
-    <form method="post">
+    <form method="post" class="form-control">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-success">{% if is_edit %}Save Changes{% else %}Save{% endif %}</button>
+        <button type="submit" class="btn btn-outline-success mb-1">{% if is_edit %}Save Changes{% else %}Save{% endif %}</button><br>
+     <a class="btn btn-outline-info mt-3" href="{% url 'todo_list' %}">Back to List</a>
     </form>
-    <a class="btn btn-primary mt-3" href="{% url 'todo_list' %}">Back to List</a>
+
 </div>
+    </div>
 {% endblock %}
