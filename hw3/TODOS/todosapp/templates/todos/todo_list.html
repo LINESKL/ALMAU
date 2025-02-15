@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Todo List{% endblock %}
+
+{% block content %}
+<div class="mt-4">
+    <h1>Todo List</h1>
+    <a class="btn btn-primary mb-3" href="{% url 'todo_create' %}">Create Todo</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for todo in todos %}
+            <tr>
+                <td><a href="{% url 'todo_detail' todo.id %}">{{ todo.title }}</a></td>
+                <td>{{ todo.description }}</td>
+                <td>{{ todo.due_date }}</td>
+                <td>{{ todo.status }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{% url 'todo_edit' todo.id %}">Edit</a>
+                    <form action="{% url 'todo_delete' todo.id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
