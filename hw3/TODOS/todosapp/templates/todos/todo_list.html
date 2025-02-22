@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="mt-4">
-    <h1>Todo List</h1>
+    <h1>Todo</h1>
     <a class="btn btn-outline-info mb-3 " href="{% url 'todo_create' %}">Create Todo</a>
     <table class="table table-sm">
         <thead>
@@ -13,7 +13,8 @@
                 <th>Description</th>
                 <th>Due Date</th>
                 <th>Status</th>
-                <th>Actions</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -25,11 +26,13 @@
                 <td>{{ todo.status }}</td>
                 <td>
                     <a class="btn btn-outline-success" href="{% url 'todo_edit' todo.id %}">Edit</a>
-                    <form action="{% url 'todo_delete' todo.id %}" method="post" style="display:inline;">
+                </td>
+            <td>
+                <form action="{% url 'todo_delete' todo.id %}" method="post" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-outline-danger">Delete</button>
                     </form>
-                </td>
+            </td>
             </tr>
             {% endfor %}
         </tbody>
